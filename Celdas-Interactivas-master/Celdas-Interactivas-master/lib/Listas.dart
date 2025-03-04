@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tareauno/constantes.dart' as con;
+import 'package:tareauno/singleton.dart';
 
 class Listas extends StatefulWidget {
   const Listas({super.key});
+  Singleton singleton = Singleton();
 
   @override
   State<Listas> createState() => _ListasState();
@@ -13,6 +15,9 @@ class _ListasState extends State<Listas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title : Text(singleton.nameUser),
+      )
       body: Column(
         mainAxisSize: MainAxisSize.min,
         children:[
@@ -67,9 +72,31 @@ class _ListasState extends State<Listas> {
                     child: Icon(Icons.edit)),
                 Expanded(
                     flex: 1,
-                    child: Icon(Icons.delete))
+                    child: IconButton(
+                  onPressed: (){
+                    showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                        title: Text(name),
+                        content: Text('Seguro que quieres eliminar a este usuario'),
+                        actions[
+                          TextButton(
+                          onPressed: (){
+                            Navigator.pop(context);
+                            },
+                          child: Text('Aceptar')
+                        )
+                        ),
+                        ),
+                      )
+                    );
+                },
+                icon: Icon(Icons.delete),
+              ),
+
 
             ],
+
             )
           ],
         ),

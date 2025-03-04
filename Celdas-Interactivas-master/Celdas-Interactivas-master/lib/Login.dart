@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tareauno/Register.dart';
 import 'package:tareauno/constantes.dart' as con;
+import 'package:tareauno/singleton.dart' ;
 
 class Login extends StatefulWidget {
   const Login({super.key});
@@ -10,6 +11,7 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  Singleton singleton = Singleton();
   bool verTexto = true;
   String msg = con.messageDefault;
   //variables para obtener el valor de los textformfield
@@ -75,6 +77,7 @@ class _LoginState extends State<Login> {
                     print(password.text);
                     if(user.text == con.user && password.text == con.pass){
                       //si son correctas cambiamos la vista
+                      singleton.username = 'Demianggs',
                       Navigator.pushReplacement(context,
                           MaterialPageRoute(builder:
                               (context) => const Register()));
